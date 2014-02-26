@@ -5,7 +5,7 @@
   "private": true,
   "description": "Bare bones zen mode.",
   "activationEvents": ["zen:toggle"],
-  "repository": "https://github.com/atom/zen",
+  "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
