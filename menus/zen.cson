@@ -1,0 +1,12 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Zen'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'zen:toggle' }
+      ]
+    ]
+  }
+]

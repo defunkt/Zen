@@ -1,0 +1,15 @@
+{
+  "name": "Zen",
+  "main": "./lib/zen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bare bones zen mode.",
+  "activationEvents": ["zen:toggle"],
+  "repository": "https://github.com/atom/zen",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
