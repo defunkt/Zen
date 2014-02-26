@@ -1,15 +1,16 @@
 {
   "name": "Zen",
   "main": "./lib/zen",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Bare bones zen mode.",
-  "activationEvents": ["zen:toggle"],
+  "activationEvents": [
+    "zen:toggle"
+  ],
   "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
