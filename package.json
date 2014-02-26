@@ -3,7 +3,7 @@
   "main": "./lib/zen",
   "version": "0.2.0",
   "private": true,
-  "description": "Bare bones zen mode.",
+  "description": "Distraction free writing.",
   "activationEvents": [
     "zen:toggle"
   ],

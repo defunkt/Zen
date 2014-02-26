@@ -1,5 +1,7 @@
 # Zen
 
+Distraction free writing for Atom.
+
 Toggle with `cmd-ctrl-z`.
 
 ## Before:
