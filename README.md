@@ -4,8 +4,8 @@ Toggle with `cmd-ctrl-z`.
 
 ## Before:
 
-![](http://cl.ly/U8W6/content.png)
+![](http://cl.ly/U8Hk/content.png)
 
 ## After:
 
-![](http://cl.ly/U7jV/content.png)
+![](http://cl.ly/U8hb/content.png)
