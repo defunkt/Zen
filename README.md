@@ -6,8 +6,8 @@ Toggle with `cmd-ctrl-z`.
 
 ## Before:
 
-![](http://cl.ly/U8Hk/content.png)
+![](https://f.cloud.github.com/assets/2/2290454/c7304340-a01d-11e3-8b89-018775a8612b.png)
 
 ## After:
 
-![](http://cl.ly/U8hb/content.png)
+![](https://f.cloud.github.com/assets/2/2290455/ce99e97e-a01d-11e3-8808-ebec40e959b4.png)
