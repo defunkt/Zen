@@ -27,3 +27,21 @@ describe "Zen", ->
         expect(atom.workspaceView.find('.zen')).toExist()
         atom.workspaceView.trigger 'zen:toggle'
         expect(atom.workspaceView.find('.zen')).not.toExist()
+
+  describe "when the `zen.hideTreeView` config is false", ->
+    it "allows the tree view to remain active when entering zen mode", ->
+      atom.config.set('zen.hideTreeView', false)
+      atom.packages.activatePackage('tree-view')
+
+      runs ->
+        atom.workspaceView.trigger 'tree-view:toggle'
+        expect(atom.workspaceView.find(".tree-view")).toExist()
+
+  describe "when the `zen.hideTreeView` config is true", ->
+    it "deactivates the tree view when entering zen mode", ->
+      atom.config.set('zen.hideTreeView', true)
+      atom.packages.activatePackage('tree-view')
+
+      runs ->
+        atom.workspaceView.trigger 'tree-view:toggle'
+        expect(atom.workspaceView.find(".tree-view")).not.toExist()
