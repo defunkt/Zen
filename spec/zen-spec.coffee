@@ -1,4 +1,5 @@
 Zen = require '../lib/zen'
+{WorkspaceView} = require 'atom'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -14,7 +15,7 @@ describe "Zen", ->
 
   describe "when the zen:toggle event is triggered", ->
     it "attaches and then detaches the view", ->
-      expect(atom.workspaceView.find('.zen')).not.toExist()
+      expect(atom.workspaceView).not.toHaveClass('zen')
 
       # This is an activation event, triggering it will cause the package to be
       # activated.
@@ -24,6 +25,6 @@ describe "Zen", ->
         activationPromise
 
       runs ->
-        expect(atom.workspaceView.find('.zen')).toExist()
+        expect(atom.workspaceView).toHaveClass('zen')
         atom.workspaceView.trigger 'zen:toggle'
-        expect(atom.workspaceView.find('.zen')).not.toExist()
+        expect(atom.workspaceView).not.toHaveClass('zen')
