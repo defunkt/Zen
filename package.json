@@ -1,16 +1,16 @@
 {
-  "name": "Zen",
-  "main": "./lib/zen",
-  "version": "0.6.0",
+  "name": "Clean",
+  "main": "./lib/clean",
+  "version": "0.0.0",
   "private": true,
   "description": "Distraction free writing.",
   "activationEvents": [
-    "zen:toggle"
+    "clean:toggle"
   ],
   "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": "*"
   },
   "dependencies": {}
 }
