@@ -1,2 +1,2 @@
 '.workspace':
-  'cmd-ctrl-z': 'zen:toggle'
+  'ctrl-shift-cmd-F': 'zen:toggle'
