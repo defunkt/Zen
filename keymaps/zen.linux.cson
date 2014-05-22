@@ -1,2 +1,2 @@
 '.workspace':
-  'ctrl-shift-Z': 'zen:toggle'
+  'shift-F11': 'zen:toggle'

@@ -2,7 +2,7 @@
 
 Distraction free writing for Atom.
 
-Toggle with `cmd-ctrl-z`.
+Toggle with familiar commands `cmd-ctrl-shift-F` on OSX or `shift-F11` on Windows and Linux.
 
 ## Before:
 
