@@ -1,4 +1,0 @@
-'.workspace':
-  'ctrl-shift-cmd-F': 'zen:toggle'
-'.workspace .editor:not(.mini)':
-  'ctrl-shift-cmd-F': 'zen:toggle'
