@@ -1,2 +1,4 @@
 '.workspace':
   'shift-F11': 'zen:toggle'
+'.workspace .editor:not(.mini)':
+  'shift-F11': 'zen:toggle'
