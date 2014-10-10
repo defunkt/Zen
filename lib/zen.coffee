@@ -14,13 +14,13 @@ module.exports =
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
 
-    if workspace.find('.tree-view').length
-      workspace.trigger 'tree-view:toggle'
-      @showTreeView = true
-
     if not editor.isSoftWrapped()
       editor.setSoftWrapped true
       @unSoftWrap = true
+
+    if workspace.find('.tree-view').length
+      workspace.trigger 'tree-view:toggle'
+      @showTreeView = true
 
     if workspace.is '.zen'
       bgColor = workspace.find('.panes .pane').css('background-color')
