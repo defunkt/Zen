@@ -18,7 +18,7 @@ module.exports =
       @unSoftWrap = true
 
     if workspace.is '.zen'
-      bgColor = workspace.find('.panes .pane').css('background-color') # aaaaaaaaaaaaaadsad sadasd asdas dasdasdasdasdsad
+      bgColor = workspace.find('.panes .pane').css('background-color') 
       tabs?.activate()
       atom.setFullScreen false if fullscreen
       if @unSoftWrap
