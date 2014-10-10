@@ -1,18 +1,22 @@
 module.exports =
   configDefaults:
     fullscreen: false
+    width: 80
 
   unSoftWrap: false
   showTreeView: false
+  oldWidth: null
 
   activate: (state) ->
     atom.workspaceView.command "zen:toggle", => @toggle()
 
   toggle: ->
     fullscreen = atom.config.get 'zen.fullscreen'
+    width = atom.config.get 'zen.width'
     workspace = atom.workspaceView
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
+    editorView = workspace.find('.editor:not(.mini)')
 
     if not editor.isSoftWrapped()
       editor.setSoftWrapped true
@@ -32,7 +36,12 @@ module.exports =
       if @showTreeView
         workspace.trigger 'tree-view:toggle'
         @showTreeView = null
+      if @oldWidth
+        editorView.css 'width', @oldWidth
+        @oldWidth = null
     else
+      @oldWidth = editorView.css 'width'
+      editorView.css 'width', "#{editor.getDefaultCharWidth() * width}px"
       bgColor = workspace.find('.editor-colors').css('background-color')
       tabs?.deactivate()
       atom.setFullScreen true if fullscreen
