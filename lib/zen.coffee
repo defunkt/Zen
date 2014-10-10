@@ -1,7 +1,7 @@
 module.exports =
   configDefaults:
     fullscreen: false
-    width: null
+    width: atom.config.get 'editor.preferredLineLength'
 
   unSoftWrap: false
   showTreeView: false
@@ -12,7 +12,7 @@ module.exports =
 
   toggle: ->
     fullscreen = atom.config.get 'zen.fullscreen'
-    width = atom.config.get('zen.width') or atom.config.get('editor.preferredLineLength')
+    width = atom.config.get 'zen.width'
     workspace = atom.workspaceView
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
