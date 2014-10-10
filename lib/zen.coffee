@@ -70,5 +70,8 @@ module.exports =
         editorView.css 'width', @oldWidth
         @oldWidth = null
 
+    # Reset background color
     workspace.find('.panes .pane').css 'background-color', bgColor
+
+    # One class to rule them all
     workspace.toggleClass 'zen'
