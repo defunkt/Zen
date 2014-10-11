@@ -4,8 +4,18 @@ Distraction free writing for Atom.
 
 Toggle with `cmd-ctrl-z` on OS X or by adding `shift` to your platform's
 fullscreen command:
+
 - `cmd-ctrl-shift-F` on OSX
 - `shift-F11` on Windows and Linux.
+
+Customize the experience in your Atom stylesheet (Atom -> Open Your Stylesheet)
+
+`
+.zen .editor {
+  width: 800px;
+  font-size:16px;
+}
+`
 
 ## Before:
 
