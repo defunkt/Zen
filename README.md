@@ -7,6 +7,8 @@ fullscreen command:
 - `cmd-ctrl-shift-F` on OSX
 - `shift-F11` on Windows and Linux.
 
+Change the width and other options in Settings under Zen.
+
 ## Before:
 
 ![](https://f.cloud.github.com/assets/2/2290454/c7304340-a01d-11e3-8b89-018775a8612b.png)
