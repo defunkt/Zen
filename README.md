@@ -11,12 +11,13 @@ fullscreen command:
 Customize the experience in your Atom stylesheet (Atom -> Open Your Stylesheet)
 
 ```
-.zen .wrap-guide { 
-  visibility: hidden; 
+.zen .wrap-guide {
+  visibility: hidden;
 }
 
 .zen .editor {
-  width: 800px;
+  width: 80%;
+  max-width: 800px;
   font-size:16px;
 }
 ```
