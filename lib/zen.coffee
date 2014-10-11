@@ -11,8 +11,8 @@ module.exports =
     atom.workspaceView.command "zen:toggle", => @toggle()
 
   toggle: ->
-    fullscreen = atom.config.get 'zen.fullscreen'
-    width = atom.config.get 'zen.width'
+    fullscreen = atom.config.get 'Zen.fullscreen'
+    width = atom.config.get 'Zen.width'
     workspace = atom.workspaceView
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
