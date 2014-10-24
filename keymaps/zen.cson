@@ -7,10 +7,8 @@
 
 '.platform-linux .workspace':
   'shift-f11': 'zen:toggle'
-  'ctrl-shift-Z': 'zen:toggle'
 '.platform-linux .workspace .editor:not(.mini)':
   'shift-f11': 'zen:toggle'
-  'ctrl-shift-Z': 'zen:toggle'
 
 '.platform-win32 .workspace':
   'shift-f11': 'zen:toggle'
