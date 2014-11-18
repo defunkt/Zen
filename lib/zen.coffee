@@ -1,22 +1,28 @@
 module.exports =
   configDefaults:
     fullscreen: false
+    hideTabs: true
     width: atom.config.get 'editor.preferredLineLength'
 
   unSoftWrap: false
   showTreeView: false
   oldWidth: null
+  paneChanged : null
 
   activate: (state) ->
     atom.workspaceView.command "zen:toggle", => @toggle()
 
   toggle: ->
     fullscreen = atom.config.get 'Zen.fullscreen'
+    hideTabs = atom.config.get 'Zen.hideTabs'
     width = atom.config.get 'Zen.width'
+
     workspace = atom.workspaceView
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
     editorView = workspace.find '.editor:not(.mini)'
+    charWidth = editor.getDefaultCharWidth()
+
 
     # Enter Zen
     if workspace.is ':not(.zen)'
@@ -31,11 +37,11 @@ module.exports =
         @showTreeView = true
 
       # Hide tabs
-      tabs?.deactivate()
+      tabs?.deactivate() if hideTabs
 
       # Set width
       @oldWidth = editorView.css 'width'
-      editorView.css 'width', "#{editor.getDefaultCharWidth() * width}px"
+      editorView.css 'width', "#{charWidth * width}px"
 
       # Get current background color
       bgColor = workspace.find('.editor-colors').css 'background-color'
@@ -43,6 +49,13 @@ module.exports =
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
 
+
+      # Listen for a pane change to update the view width
+      @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+        # wait for the next tick to update the editor view width
+        requestAnimationFrame ->
+          view = atom.workspaceView.find '.editor:not(.mini)'
+          view.css 'width': "#{charWidth * width}px"
     else
       # Exit Zen
 
@@ -50,7 +63,7 @@ module.exports =
       bgColor = workspace.find('.panes .pane').css 'background-color'
 
       # Show tabs
-      tabs?.activate()
+      tabs?.activate() if hideTabs
 
       # Leave fullscreen
       atom.setFullScreen false if fullscreen
@@ -69,6 +82,9 @@ module.exports =
       if @oldWidth
         editorView.css 'width', @oldWidth
         @oldWidth = null
+
+      # Stop listening for pane change
+      @paneChanged?.dispose()
 
     # Reset background color
     workspace.find('.panes .pane').css 'background-color', bgColor
