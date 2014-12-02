@@ -7,7 +7,7 @@ module.exports =
   unSoftWrap: false
   showTreeView: false
   oldWidth: null
-  paneChanged : null
+  paneChanged: null
 
   activate: (state) ->
     atom.workspaceView.command "zen:toggle", => @toggle()
@@ -22,7 +22,6 @@ module.exports =
     editor = workspace.getActiveView().editor
     editorView = workspace.find '.editor:not(.mini)'
     charWidth = editor.getDefaultCharWidth()
-
 
     # Enter Zen
     if workspace.is ':not(.zen)'
@@ -48,7 +47,6 @@ module.exports =
 
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
-
 
       # Listen for a pane change to update the view width
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
