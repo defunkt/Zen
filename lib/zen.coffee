@@ -10,7 +10,7 @@ module.exports =
   paneChanged: null
 
   activate: (state) ->
-    atom.workspaceView.command "zen:toggle", => @toggle()
+    atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
 
   toggle: ->
     fullscreen = atom.config.get 'Zen.fullscreen'
