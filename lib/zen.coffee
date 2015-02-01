@@ -20,7 +20,7 @@ module.exports =
     workspace = atom.workspaceView
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
-    editorView = workspace.find '.editor:not(.mini)'
+    editorView = workspace.find 'atom-text-editor:not(.mini)'
     charWidth = editor.getDefaultCharWidth()
 
     # Enter Zen
@@ -52,7 +52,7 @@ module.exports =
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
         # wait for the next tick to update the editor view width
         requestAnimationFrame ->
-          view = atom.workspaceView.find '.editor:not(.mini)'
+          view = atom.workspaceView.find 'atom-text-editor:not(.mini)'
           view.css 'width': "#{charWidth * width}px"
     else
       # Exit Zen
