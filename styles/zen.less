@@ -12,10 +12,18 @@
   }
 
   atom-text-editor:not(.mini) {
-    margin: 1em auto;
+    margin: 0 auto;
   }
 
-  .gutter, .status-bar, .tab-bar {
+  
+  .status-bar,
+  .tab-bar {
     display: none;
+  }
+
+  atom-text-editor::shadow {
+    .gutter {
+      display: none;
+    }
   }
 }
