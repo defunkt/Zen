@@ -26,9 +26,16 @@ module.exports =
     # Enter Zen
     if workspace.is ':not(.zen)'
       # Soft Wrap
-      if not editor.isSoftWrapped()
-        editor.setSoftWrapped true
-        @unSoftWrap = true
+      # set it so it's true for all new editors you open in zen
+      if atom.config.get('editor.softWrap') is false
+        atom.config.set('editor.softWrap', true)
+        # remember to put it back later
+        @unSetSoftWrap = true
+      if editor isnt undefined # undefined in settings-view
+        if editor.isSoftWrapped() is false
+          editor.setSoftWrapped true
+          # and remember to set is back later
+          @unSoftWrap = true
 
       # Hide TreeView
       if workspace.find('.tree-view').length
@@ -70,6 +77,10 @@ module.exports =
       if @unSoftWrap
         editor.setSoftWrapped false
         @unSoftWrap = null
+
+      # Reset the config for softwrap if it was enabled when we zen'd
+      if @unSetSoftWrap
+        atom.config.set('editor.softWrap', false)
 
       # Show TreeView if it was shown when we zen'd
       if @showTreeView
