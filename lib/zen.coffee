@@ -1,8 +1,14 @@
 module.exports =
-  configDefaults:
-    fullscreen: false
-    hideTabs: true
-    width: atom.config.get 'editor.preferredLineLength'
+  config:
+    fullscreen:
+      type: 'boolean'
+      default: false
+    hideTabs:
+      type: 'boolean'
+      default: false
+    width:
+      type: 'integer'
+      default: atom.config.get 'editor.preferredLineLength'
 
   unSoftWrap: false
   showTreeView: false
