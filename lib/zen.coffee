@@ -62,7 +62,6 @@ module.exports =
       # Listen to font-size changes and update the view width
       @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
         editorView.css 'width', editor.getDefaultCharWidth() * width
-        console.log(editor.getDefaultCharWidth() * width)
 
       # Listen for a pane change to update the view width
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
