@@ -61,7 +61,7 @@ module.exports =
       editorView.css 'width', editor.getDefaultCharWidth() * width
 
       # Listen to font-size changes and update the view width
-      atom.config.onDidChange 'editor.fontSize', ->
+      @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
         editorView.css 'width', editor.getDefaultCharWidth() * width
         console.log(editor.getDefaultCharWidth() * width)
 
@@ -100,7 +100,8 @@ module.exports =
         editorView.css 'width', @oldWidth
         @oldWidth = null
 
-      # Stop listening for pane change
+      # Stop listening for pane or font change
+      @fontChanged?.dispose()
       @paneChanged?.dispose()
 
     # One class to rule them all
