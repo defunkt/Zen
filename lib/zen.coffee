@@ -72,17 +72,11 @@ module.exports =
           view = atom.workspaceView.find 'atom-text-editor:not(.mini)'
           view.css 'width': "#{editor.getDefaultCharWidth() * width}px"
 
-      # Get current background color
-      bgColor = workspace.find('.editor-colors').css 'background-color'
-
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
 
     else
       # Exit Zen
-
-      # Get current background color
-      bgColor = workspace.find('.panes .pane').css 'background-color'
 
       # Leave fullscreen
       atom.setFullScreen false if fullscreen
@@ -108,9 +102,6 @@ module.exports =
 
       # Stop listening for pane change
       @paneChanged?.dispose()
-
-    # Reset background color
-    workspace.find('.panes .pane').css 'background-color', bgColor
 
     # One class to rule them all
     workspace.toggleClass 'zen'
