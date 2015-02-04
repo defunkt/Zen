@@ -68,7 +68,7 @@ module.exports =
         # wait for the next tick to update the editor view width
         requestAnimationFrame ->
           view = atom.workspaceView.find 'atom-text-editor:not(.mini)'
-          view.css 'width': "#{editor.getDefaultCharWidth() * width}px"
+          view.css 'width': editor.getDefaultCharWidth() * width
 
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
