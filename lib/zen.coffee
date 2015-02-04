@@ -25,13 +25,12 @@ module.exports =
     editor = workspace.getActiveView().editor
     editorView = workspace.find 'atom-text-editor:not(.mini)'
     body = document.querySelector('body')
+    fullscreen = atom.config.get 'Zen.fullscreen'
+    width = atom.config.get 'Zen.width'
 
     if editor is undefined # e.g. settings-view
       atom.notifications.addInfo("Zen cannot be achieved in this view.");
       return
-
-    fullscreen = atom.config.get 'Zen.fullscreen'
-    width = atom.config.get 'Zen.width'
 
     if atom.config.get 'Zen.showTabs'
       body.setAttribute('zen-tabs', 'true')
