@@ -3,7 +3,8 @@ module.exports =
     fullscreen:
       type: 'boolean'
       default: false
-    hideTabs:
+    showTabs:
+      description: 'Show the current tab when zen.'
       type: 'boolean'
       default: false
     width:
@@ -21,18 +22,22 @@ module.exports =
   toggle: ->
     # Enter Zen
     workspace = atom.workspaceView
-    tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
     editorView = workspace.find 'atom-text-editor:not(.mini)'
+    body = document.querySelector('body')
 
     if editor is undefined # e.g. settings-view
       atom.notifications.addInfo("Zen cannot be achieved in this view.");
       return
 
     fullscreen = atom.config.get 'Zen.fullscreen'
-    hideTabs = atom.config.get 'Zen.hideTabs'
     width = atom.config.get 'Zen.width'
     charWidth = editor.getDefaultCharWidth()
+
+    if atom.config.get 'Zen.showTabs'
+      body.setAttribute('zen-tabs', 'true')
+    else
+      body.setAttribute('zen-tabs', 'false')
 
     if workspace.is ':not(.zen)'
       # Soft Wrap
@@ -50,9 +55,6 @@ module.exports =
       if workspace.find('.tree-view').length
         workspace.trigger 'tree-view:toggle'
         @showTreeView = true
-
-      # Hide tabs
-      tabs?.deactivate() if hideTabs
 
       # Set width
       @oldWidth = editorView.css 'width'
@@ -75,9 +77,6 @@ module.exports =
 
       # Get current background color
       bgColor = workspace.find('.panes .pane').css 'background-color'
-
-      # Show tabs
-      tabs?.activate() if hideTabs
 
       # Leave fullscreen
       atom.setFullScreen false if fullscreen
