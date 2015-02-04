@@ -21,9 +21,13 @@ module.exports =
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
     editorView = workspace.find 'atom-text-editor:not(.mini)'
-    charWidth = atom.config.get('editor.fontSize')
+    charWidth = editor.getDefaultCharWidth()
 
     # Enter Zen
+    if editor is undefined # e.g. settings-view
+      atom.notifications.addWarning("Zen cannot be achieved in this view.");
+      return
+
     if workspace.is ':not(.zen)'
       # Soft Wrap
       # set it so it's true for all new editors you open in zen
@@ -31,11 +35,10 @@ module.exports =
         atom.config.set('editor.softWrap', true)
         # remember to put it back later
         @unSetSoftWrap = true
-      if editor isnt undefined # undefined in settings-view
-        if editor.isSoftWrapped() is false
-          editor.setSoftWrapped true
-          # and remember to set is back later
-          @unSoftWrap = true
+      if editor.isSoftWrapped() is false
+        editor.setSoftWrapped true
+        # and remember to set is back later
+        @unSoftWrap = true
 
       # Hide TreeView
       if workspace.find('.tree-view').length
