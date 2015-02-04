@@ -1,6 +1,3 @@
-'atom-workspace.zen':
-  'escape': 'zen:toggle'
-
 '.platform-darwin atom-workspace':
   'ctrl-shift-cmd-F': 'zen:toggle'
   'cmd-ctrl-z': 'zen:toggle'
