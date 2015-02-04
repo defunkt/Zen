@@ -20,7 +20,7 @@ module.exports =
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
 
   toggle: ->
-    # Enter Zen
+
     workspace = atom.workspaceView
     editor = workspace.getActiveView().editor
     editorView = workspace.find 'atom-text-editor:not(.mini)'
@@ -32,13 +32,13 @@ module.exports =
 
     fullscreen = atom.config.get 'Zen.fullscreen'
     width = atom.config.get 'Zen.width'
-    charWidth = editor.getDefaultCharWidth()
 
     if atom.config.get 'Zen.showTabs'
       body.setAttribute('zen-tabs', 'true')
     else
       body.setAttribute('zen-tabs', 'false')
 
+    # Enter Zen
     if workspace.is ':not(.zen)'
       # Soft Wrap
       # set it so it's true for all new editors you open in zen
@@ -58,7 +58,19 @@ module.exports =
 
       # Set width
       @oldWidth = editorView.css 'width'
-      editorView.css 'width', "#{charWidth * width}px"
+      editorView.css 'width', editor.getDefaultCharWidth() * width
+
+      # Listen to font-size changes and update the view width
+      atom.config.onDidChange 'editor.fontSize', ->
+        editorView.css 'width', editor.getDefaultCharWidth() * width
+        console.log(editor.getDefaultCharWidth() * width)
+
+      # Listen for a pane change to update the view width
+      @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+        # wait for the next tick to update the editor view width
+        requestAnimationFrame ->
+          view = atom.workspaceView.find 'atom-text-editor:not(.mini)'
+          view.css 'width': "#{editor.getDefaultCharWidth() * width}px"
 
       # Get current background color
       bgColor = workspace.find('.editor-colors').css 'background-color'
@@ -66,12 +78,6 @@ module.exports =
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
 
-      # Listen for a pane change to update the view width
-      @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
-        # wait for the next tick to update the editor view width
-        requestAnimationFrame ->
-          view = atom.workspaceView.find 'atom-text-editor:not(.mini)'
-          view.css 'width': "#{charWidth * width}px"
     else
       # Exit Zen
 
