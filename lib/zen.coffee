@@ -20,6 +20,11 @@ module.exports =
 
   toggle: ->
     # Enter Zen
+    workspace = atom.workspaceView
+    tabs = atom.packages.activePackages.tabs
+    editor = workspace.getActiveView().editor
+    editorView = workspace.find 'atom-text-editor:not(.mini)'
+
     if editor is undefined # e.g. settings-view
       atom.notifications.addInfo("Zen cannot be achieved in this view.");
       return
@@ -27,11 +32,6 @@ module.exports =
     fullscreen = atom.config.get 'Zen.fullscreen'
     hideTabs = atom.config.get 'Zen.hideTabs'
     width = atom.config.get 'Zen.width'
-
-    workspace = atom.workspaceView
-    tabs = atom.packages.activePackages.tabs
-    editor = workspace.getActiveView().editor
-    editorView = workspace.find 'atom-text-editor:not(.mini)'
     charWidth = editor.getDefaultCharWidth()
 
     if workspace.is ':not(.zen)'
