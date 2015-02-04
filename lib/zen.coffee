@@ -21,7 +21,7 @@ module.exports =
     tabs = atom.packages.activePackages.tabs
     editor = workspace.getActiveView().editor
     editorView = workspace.find 'atom-text-editor:not(.mini)'
-    charWidth = editor.getDefaultCharWidth()
+    charWidth = atom.config.get('editor.fontSize')
 
     # Enter Zen
     if workspace.is ':not(.zen)'
