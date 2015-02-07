@@ -43,7 +43,7 @@ module.exports =
       editorView.css 'width', "#{charWidth * width}px"
 
       # Get current background color
-      bgColor = workspace.find('.editor-colors').css 'background-color'
+      bgColor = workspace.find('atom-text-editor').css 'background-color'
 
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
