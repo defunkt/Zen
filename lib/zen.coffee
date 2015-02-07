@@ -50,18 +50,18 @@ module.exports =
         @unSoftWrap = true
 
       # Set width
-      @oldWidth = $('atom-text-editor').css 'width'
-      $('atom-text-editor').css 'width', editor.getDefaultCharWidth() * width
+      @oldWidth = $('atom-text-editor:not(.mini)').css 'width'
+      $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Listen to font-size changes and update the view width
       @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
-        $('atom-text-editor').css 'width', editor.getDefaultCharWidth() * width
+        $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Listen for a pane change to update the view width
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
         # wait for the next tick to update the editor view width
         requestAnimationFrame ->
-          $('atom-text-editor').css 'width', editor.getDefaultCharWidth() * width
+          $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Hide TreeView
       if $('.tree-view').length
@@ -92,7 +92,7 @@ module.exports =
 
       # Reset the width
       if @oldWidth
-        $('atom-text-editor').css 'width', @oldWidth
+        $('atom-text-editor:not(.mini)').css 'width', @oldWidth
         @oldWidth = null
 
       # Hide TreeView
