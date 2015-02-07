@@ -3,9 +3,9 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'Zen'
+      'label': 'Distraction Free Mode'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'zen:toggle' }
+        { 'label': 'Toggle', 'command': 'distraction-free:toggle' }
       ]
     ]
   }
