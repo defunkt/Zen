@@ -1,13 +1,12 @@
-# Zen
+# Distraction free mode
 
 Distraction free writing for Atom.
 
-Toggle with `cmd-ctrl-z` on OS X or by adding `shift` to your platform's
-fullscreen command:
-- `cmd-ctrl-shift-F` on OSX
+Toggle:
+- `cmd-ctrl-z` or `cmd-ctrl-shift-F` on OSX
 - `shift-F11` on Windows and Linux.
 
-Change the width and other options in Settings under Zen.
+Change the width and other options in Settings.
 
 ## Before:
 
@@ -16,3 +15,5 @@ Change the width and other options in Settings under Zen.
 ## After:
 
 ![](https://f.cloud.github.com/assets/2/2290455/ce99e97e-a01d-11e3-8808-ebec40e959b4.png)
+
+Improves upon [Zen](https://atom.io/packages/zen).
