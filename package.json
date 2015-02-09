@@ -1,7 +1,7 @@
 {
   "name": "distraction-free-mode",
   "main": "./lib/zen",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "Distraction free writing mode.",
   "activationEvents": [
     "distraction-free:toggle"
