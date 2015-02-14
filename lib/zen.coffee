@@ -26,7 +26,7 @@ module.exports =
     width = atom.config.get 'distraction-free-mode.width'
 
     if editor is undefined # e.g. settings-view
-      atom.notifications.addInfo("Distraction free mode cannot be toggled in this view.");
+      atom.notifications.addInfo 'Distraction free mode cannot be toggled in this view.'
       return
 
     if atom.config.get 'distraction-free-mode.showTabs'
