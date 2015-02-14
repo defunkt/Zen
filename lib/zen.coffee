@@ -50,7 +50,6 @@ module.exports =
         @unSoftWrap = true
 
       # Set width
-      @oldWidth = $('atom-text-editor:not(.mini)').css 'width'
       $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Listen to font-size changes and update the view width
@@ -90,10 +89,8 @@ module.exports =
       if @unSetSoftWrap
         atom.config.set('editor.softWrap', false)
 
-      # Reset the width
-      if @oldWidth
-        $('atom-text-editor:not(.mini)').css 'width', @oldWidth
-        @oldWidth = null
+      # Unset the width
+      $('atom-text-editor:not(.mini)').css 'width', ''
 
       # Hide TreeView
       if @restoreTree
