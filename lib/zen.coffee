@@ -50,15 +50,16 @@ module.exports =
         @unSoftWrap = true
 
       # Set width
-      $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
+      requestAnimationFrame ->
+        $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Listen to font-size changes and update the view width
       @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
-        $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
+        requestAnimationFrame ->
+          $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       # Listen for a pane change to update the view width
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
-        # wait for the next tick to update the editor view width
         requestAnimationFrame ->
           $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
