@@ -9,6 +9,10 @@ module.exports =
       description: 'Show the current tab in distraction free mode.'
       type: 'boolean'
       default: false
+    showWordCount:
+      description: 'Show the word-count if you have the package installed.'
+      type: 'boolean'
+      default: false
     width:
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
@@ -33,6 +37,11 @@ module.exports =
       body.setAttribute('zen-tabs', 'true')
     else
       body.setAttribute('zen-tabs', 'false')
+
+    if atom.config.get 'distraction-free-mode.showWordCount'
+      body.setAttribute('zen-word-count', 'true')
+    else
+      body.setAttribute('zen-word-count', 'false')
 
     if body.getAttribute('zen') isnt 'true'
       # Enter Mode

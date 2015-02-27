@@ -1,4 +1,4 @@
-// @import "ui-variables";
+@import "ui-variables";
 @import "syntax-variables";
 
 [zen="true"] {
@@ -12,17 +12,30 @@
     margin: 0 auto;
   }
 
-  .status-bar,
   .tab-bar {
     display: none;
   }
   .wrap-guide {
     visibility: hidden;
   }
+  .status-bar {
+    height: 0;
+  }
 
   ::shadow {
     .gutter {
       display: none;
+    }
+  }
+
+  &[zen-word-count="true"] {
+    .status-bar .word-count {
+      position: fixed;
+      bottom: @component-padding;
+      right: @component-padding;
+      padding: 0 @component-padding;
+      background: @syntax-background-color;
+      color: @syntax-text-color;
     }
   }
 
