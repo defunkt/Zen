@@ -18,7 +18,7 @@ module.exports =
       default: atom.config.get 'editor.preferredLineLength'
 
   activate: (state) ->
-    atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
+    atom.commands.add 'atom-workspace', 'Zen:toggle', => @toggle()
 
   toggle: ->
 
@@ -26,19 +26,19 @@ module.exports =
     editor = atom.workspace.getActiveTextEditor()
 
     # should really check current fullsceen state
-    fullscreen = atom.config.get 'zen.fullscreen'
-    width = atom.config.get 'zen.width'
+    fullscreen = atom.config.get 'Zen.fullscreen'
+    width = atom.config.get 'Zen.width'
 
     if editor is undefined # e.g. settings-view
       atom.notifications.addInfo 'Zen cannot be achieved in this view.'
       return
 
-    if atom.config.get 'zen.hideTabs'
+    if atom.config.get 'Zen.hideTabs'
       body.setAttribute('data-zen-tabs', 'hidden')
     else
       body.setAttribute('data-zen-tabs', 'visible')
 
-    if atom.config.get 'zen.showWordCount'
+    if atom.config.get 'Zen.showWordCount'
       body.setAttribute('data-zen-word-count', 'visible')
     else
       body.setAttribute('data-zen-word-count', 'hidden')

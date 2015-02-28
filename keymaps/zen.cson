@@ -1,18 +1,18 @@
 '.platform-darwin atom-workspace':
-  'ctrl-shift-cmd-F': 'zen:toggle'
-  'cmd-ctrl-z': 'zen:toggle'
+  'ctrl-shift-cmd-F': 'Zen:toggle'
+  'cmd-ctrl-z': 'Zen:toggle'
 '.platform-darwin atom-workspace atom-text-editor:not(.mini)':
-  'ctrl-shift-cmd-F': 'zen:toggle'
-  'cmd-ctrl-z': 'zen:toggle'
+  'ctrl-shift-cmd-F': 'Zen:toggle'
+  'cmd-ctrl-z': 'Zen:toggle'
 
 '.platform-linux atom-workspace':
-  'shift-f11': 'zen:toggle'
+  'shift-f11': 'Zen:toggle'
 '.platform-linux atom-workspace atom-text-editor:not(.mini)':
-  'shift-f11': 'zen:toggle'
+  'shift-f11': 'Zen:toggle'
 
 '.platform-win32 atom-workspace':
-  'shift-f11': 'zen:toggle'
-  'ctrl-shift-Z': 'zen:toggle'
+  'shift-f11': 'Zen:toggle'
+  'ctrl-shift-Z': 'Zen:toggle'
 '.platform-win32 atom-workspace atom-text-editor:not(.mini)':
-  'shift-f11': 'zen:toggle'
-  'ctrl-shift-Z': 'zen:toggle'
+  'shift-f11': 'Zen:toggle'
+  'ctrl-shift-Z': 'Zen:toggle'

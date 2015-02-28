@@ -4,7 +4,7 @@
     'submenu': [
       'label': 'Zen'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'zen:toggle' }
+        { 'label': 'Toggle', 'command': 'Zen:toggle' }
       ]
     ]
   }
