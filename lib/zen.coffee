@@ -5,10 +5,10 @@ module.exports =
     fullscreen:
       type: 'boolean'
       default: true
-    showTabs:
+    hideTabs:
       description: 'Show the current tab in distraction free mode.'
       type: 'boolean'
-      default: false
+      default: true
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
       type: 'boolean'
@@ -33,10 +33,10 @@ module.exports =
       atom.notifications.addInfo 'Distraction free mode cannot be toggled in this view.'
       return
 
-    if atom.config.get 'distraction-free-mode.showTabs'
-      body.setAttribute('zen-tabs', 'true')
+    if atom.config.get 'distraction-free-mode.hideTabs'
+      body.setAttribute('zen-tabs', 'hidden')
     else
-      body.setAttribute('zen-tabs', 'false')
+      body.setAttribute('zen-tabs', 'visible')
 
     if atom.config.get 'distraction-free-mode.showWordCount'
       body.setAttribute('zen-word-count', 'true')
