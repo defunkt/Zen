@@ -6,7 +6,7 @@ module.exports =
       type: 'boolean'
       default: true
     hideTabs:
-      description: 'Show the current tab in distraction free mode.'
+      description: 'Show the current tab.'
       type: 'boolean'
       default: true
     showWordCount:
@@ -18,7 +18,7 @@ module.exports =
       default: atom.config.get 'editor.preferredLineLength'
 
   activate: (state) ->
-    atom.commands.add 'atom-workspace', 'distraction-free:toggle', => @toggle()
+    atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
 
   toggle: ->
 
@@ -26,19 +26,19 @@ module.exports =
     editor = atom.workspace.getActiveTextEditor()
 
     # should really check current fullsceen state
-    fullscreen = atom.config.get 'distraction-free-mode.fullscreen'
-    width = atom.config.get 'distraction-free-mode.width'
+    fullscreen = atom.config.get 'zen.fullscreen'
+    width = atom.config.get 'zen.width'
 
     if editor is undefined # e.g. settings-view
       atom.notifications.addInfo 'Zen cannot be achieved in this view.'
       return
 
-    if atom.config.get 'distraction-free-mode.hideTabs'
+    if atom.config.get 'zen.hideTabs'
       body.setAttribute('data-zen-tabs', 'hidden')
     else
       body.setAttribute('data-zen-tabs', 'visible')
 
-    if atom.config.get 'distraction-free-mode.showWordCount'
+    if atom.config.get 'zen.showWordCount'
       body.setAttribute('data-zen-word-count', 'visible')
     else
       body.setAttribute('data-zen-word-count', 'hidden')
