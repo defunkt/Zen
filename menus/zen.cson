@@ -1,11 +1,10 @@
-# See https://atom.io/docs/latest/creating-a-package#menus for more details
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'Distraction Free Mode'
+      'label': 'Zen'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'distraction-free:toggle' }
+        { 'label': 'Toggle', 'command': 'zen:toggle' }
       ]
     ]
   }
