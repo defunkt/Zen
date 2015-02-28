@@ -18,7 +18,7 @@ module.exports =
       default: atom.config.get 'editor.preferredLineLength'
 
   activate: (state) ->
-    atom.commands.add 'atom-workspace', 'Zen:toggle', => @toggle()
+    atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
 
   toggle: ->
 
