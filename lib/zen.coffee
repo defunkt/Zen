@@ -34,18 +34,18 @@ module.exports =
       return
 
     if atom.config.get 'Zen.hideTabs'
-      body.setAttribute('data-zen-tabs', 'hidden')
+      body.setAttribute 'data-zen-tabs', 'hidden'
     else
-      body.setAttribute('data-zen-tabs', 'visible')
+      body.setAttribute 'data-zen-tabs', 'visible'
 
     if atom.config.get 'Zen.showWordCount'
-      body.setAttribute('data-zen-word-count', 'visible')
+      body.setAttribute 'data-zen-word-count', 'visible'
     else
-      body.setAttribute('data-zen-word-count', 'hidden')
+      body.setAttribute 'data-zen-word-count', 'hidden'
 
     if body.getAttribute('data-zen') isnt 'true'
       # Enter Mode
-      body.setAttribute('data-zen', 'true')
+      body.setAttribute 'data-zen', 'true'
 
       # Soft Wrap
       # set it so it's true for all new editors you open in zen
