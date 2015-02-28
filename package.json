@@ -1,17 +1,16 @@
 {
-  "name": "distraction-free-mode",
+  "name": "Zen",
   "main": "./lib/zen",
-  "version": "0.11.4",
-  "description": "Distraction free writing mode.",
+  "version": "0.10.0",
+  "private": true,
+  "description": "Distraction free writing.",
   "activationEvents": [
-    "distraction-free:toggle"
+    "zen:toggle"
   ],
-  "repository": "https://github.com/braver/distraction-free-mode",
+  "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">0.50.0"
   },
-  "dependencies": {
-    "jquery": "2.x.x"
-  }
+  "dependencies": {}
 }
