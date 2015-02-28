@@ -1,4 +1,6 @@
 $ = require 'jquery'
+# jquery used only to manipulate editor width
+# we'd rather move away from this dependency than expand on it
 
 module.exports =
   config:
