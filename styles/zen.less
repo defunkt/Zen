@@ -1,7 +1,7 @@
 @import "ui-variables";
 @import "syntax-variables";
 
-[zen="true"] {
+[data-zen="true"] {
   atom-workspace,
   atom-pane-container atom-pane,
   atom-pane-container atom-pane .item-views {
@@ -28,7 +28,7 @@
     }
   }
 
-  &[zen-word-count="true"] {
+  &[data-zen-word-count="visible"] {
     .status-bar .word-count {
       position: fixed;
       bottom: @component-padding;
@@ -39,7 +39,7 @@
     }
   }
 
-  &[zen-tabs="visible"] {
+  &[data-zen-tabs="visible"] {
     .tab-bar {
       display: flex;
       justify-content: center;

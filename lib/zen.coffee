@@ -34,18 +34,18 @@ module.exports =
       return
 
     if atom.config.get 'distraction-free-mode.hideTabs'
-      body.setAttribute('zen-tabs', 'hidden')
+      body.setAttribute('data-zen-tabs', 'hidden')
     else
-      body.setAttribute('zen-tabs', 'visible')
+      body.setAttribute('data-zen-tabs', 'visible')
 
     if atom.config.get 'distraction-free-mode.showWordCount'
-      body.setAttribute('zen-word-count', 'true')
+      body.setAttribute('data-zen-word-count', 'visible')
     else
-      body.setAttribute('zen-word-count', 'false')
+      body.setAttribute('data-zen-word-count', 'hidden')
 
-    if body.getAttribute('zen') isnt 'true'
+    if body.getAttribute('data-zen') isnt 'true'
       # Enter Mode
-      body.setAttribute('zen', 'true')
+      body.setAttribute('data-zen', 'true')
 
       # Soft Wrap
       # set it so it's true for all new editors you open in zen
@@ -85,7 +85,7 @@ module.exports =
 
     else
       # Exit Mode
-      body.setAttribute 'zen', 'false'
+      body.setAttribute 'data-zen', 'false'
 
       # Leave fullscreen
       atom.setFullScreen false if fullscreen
