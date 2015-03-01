@@ -4,9 +4,9 @@
   "version": "0.10.0",
   "private": true,
   "description": "Distraction free writing.",
-  "activationEvents": [
-    "zen:toggle"
-  ],
+  "activationCommands": {
+    "atom-text-editor": ["zen:toggle"]
+  },
   "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
   "engines": {
