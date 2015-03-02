@@ -12,6 +12,8 @@ Settings:
 - Keep the current tab visible
 - Keep the [word count](https://atom.io/packages/wordcount) visible
 
+Note that settings are not available until the package has been activated, due to [a shortcoming in core](https://github.com/atom/settings-view/issues/356).
+
 ## Before:
 
 ![](https://f.cloud.github.com/assets/2/2290454/c7304340-a01d-11e3-8b89-018775a8612b.png)
