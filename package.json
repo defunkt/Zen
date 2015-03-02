@@ -1,11 +1,13 @@
 {
   "name": "Zen",
   "main": "./lib/zen",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "Distraction free writing.",
   "activationCommands": {
-    "atom-text-editor": ["zen:toggle"]
+    "atom-text-editor": [
+      "zen:toggle"
+    ]
   },
   "repository": "https://github.com/defunkt/zen",
   "license": "MIT",
