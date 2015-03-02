@@ -1,67 +1,93 @@
-module.exports =
-  configDefaults:
-    fullscreen: false
-    hideTabs: true
-    width: atom.config.get 'editor.preferredLineLength'
+$ = require 'jquery'
+# jquery used only to manipulate editor width
+# we'd rather move away from this dependency than expand on it
 
-  unSoftWrap: false
-  showTreeView: false
-  oldWidth: null
-  paneChanged: null
+module.exports =
+  config:
+    fullscreen:
+      type: 'boolean'
+      default: true
+    hideTabs:
+      description: 'Show the current tab.'
+      type: 'boolean'
+      default: true
+    showWordCount:
+      description: 'Show the word-count if you have the package installed.'
+      type: 'boolean'
+      default: false
+    width:
+      type: 'integer'
+      default: atom.config.get 'editor.preferredLineLength'
 
   activate: (state) ->
-    atom.workspaceView.command "zen:toggle", => @toggle()
+    atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
 
   toggle: ->
+
+    body = document.querySelector('body')
+    editor = atom.workspace.getActiveTextEditor()
+
+    # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
-    hideTabs = atom.config.get 'Zen.hideTabs'
     width = atom.config.get 'Zen.width'
 
-    workspace = atom.workspaceView
-    tabs = atom.packages.activePackages.tabs
-    editor = workspace.getActiveView().editor
-    editorView = workspace.find '.editor:not(.mini)'
-    charWidth = editor.getDefaultCharWidth()
+    if editor is undefined # e.g. settings-view
+      atom.notifications.addInfo 'Zen cannot be achieved in this view.'
+      return
 
-    # Enter Zen
-    if workspace.is ':not(.zen)'
+    if atom.config.get 'Zen.hideTabs'
+      body.setAttribute 'data-zen-tabs', 'hidden'
+    else
+      body.setAttribute 'data-zen-tabs', 'visible'
+
+    if atom.config.get 'Zen.showWordCount'
+      body.setAttribute 'data-zen-word-count', 'visible'
+    else
+      body.setAttribute 'data-zen-word-count', 'hidden'
+
+    if body.getAttribute('data-zen') isnt 'true'
+      # Enter Mode
+      body.setAttribute 'data-zen', 'true'
+
       # Soft Wrap
-      if not editor.isSoftWrapped()
+      # set it so it's true for all new editors you open in zen
+      if atom.config.get('editor.softWrap') is false
+        atom.config.set('editor.softWrap', true)
+        # remember to put it back later
+        @unSetSoftWrap = true
+      if editor.isSoftWrapped() is false
         editor.setSoftWrapped true
+        # and remember to set is back later
         @unSoftWrap = true
 
-      # Hide TreeView
-      if workspace.find('.tree-view').length
-        workspace.trigger 'tree-view:toggle'
-        @showTreeView = true
-
-      # Hide tabs
-      tabs?.deactivate() if hideTabs
-
       # Set width
-      @oldWidth = editorView.css 'width'
-      editorView.css 'width', "#{charWidth * width}px"
+      requestAnimationFrame ->
+        $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
-      # Get current background color
-      bgColor = workspace.find('.editor-colors').css 'background-color'
+      # Listen to font-size changes and update the view width
+      @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
+        requestAnimationFrame ->
+          $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
+
+      # Listen for a pane change to update the view width
+      @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+        requestAnimationFrame ->
+          $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
+
+      # Hide TreeView
+      if $('.tree-view').length
+        atom.commands.dispatch(
+          atom.views.getView(atom.workspace),
+          'tree-view:toggle'
+        )
+        @restoreTree = true
 
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
 
-      # Listen for a pane change to update the view width
-      @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
-        # wait for the next tick to update the editor view width
-        requestAnimationFrame ->
-          view = atom.workspaceView.find '.editor:not(.mini)'
-          view.css 'width': "#{charWidth * width}px"
     else
-      # Exit Zen
-
-      # Get current background color
-      bgColor = workspace.find('.panes .pane').css 'background-color'
-
-      # Show tabs
-      tabs?.activate() if hideTabs
+      # Exit Mode
+      body.setAttribute 'data-zen', 'false'
 
       # Leave fullscreen
       atom.setFullScreen false if fullscreen
@@ -71,21 +97,22 @@ module.exports =
         editor.setSoftWrapped false
         @unSoftWrap = null
 
-      # Show TreeView if it was shown when we zen'd
-      if @showTreeView
-        workspace.trigger 'tree-view:toggle'
-        @showTreeView = null
+      # Reset the config for softwrap if it was enabled when we zen'd
+      if @unSetSoftWrap
+        atom.config.set('editor.softWrap', false)
 
-      # Reset the width
-      if @oldWidth
-        editorView.css 'width', @oldWidth
-        @oldWidth = null
+      # Unset the width
+      $('atom-text-editor:not(.mini)').css 'width', ''
 
-      # Stop listening for pane change
+      # Hide TreeView
+      if @restoreTree
+        atom.commands.dispatch(
+          atom.views.getView(atom.workspace),
+          'tree-view:show'
+        )
+        @restoreTree = false
+
+
+      # Stop listening for pane or font change
+      @fontChanged?.dispose()
       @paneChanged?.dispose()
-
-    # Reset background color
-    workspace.find('.panes .pane').css 'background-color', bgColor
-
-    # One class to rule them all
-    workspace.toggleClass 'zen'

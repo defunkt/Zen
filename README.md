@@ -7,7 +7,10 @@ fullscreen command:
 - `cmd-ctrl-shift-F` on OSX
 - `shift-F11` on Windows and Linux.
 
-Change the width and other options in Settings under Zen.
+Settings:
+- Width
+- Keep the current tab visible
+- Keep the [word count](https://atom.io/packages/wordcount) visible
 
 ## Before:
 

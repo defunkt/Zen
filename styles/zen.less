@@ -1,0 +1,55 @@
+@import "ui-variables";
+@import "syntax-variables";
+
+[data-zen="true"] {
+  atom-workspace,
+  atom-pane-container atom-pane,
+  atom-pane-container atom-pane .item-views {
+    background: @syntax-background-color !important;
+  }
+
+  atom-text-editor:not(.mini) {
+    margin: 0 auto;
+  }
+
+  .tab-bar {
+    display: none;
+  }
+  .wrap-guide {
+    visibility: hidden;
+  }
+  .status-bar {
+    height: 0;
+  }
+
+  ::shadow {
+    .gutter {
+      display: none;
+    }
+  }
+
+  &[data-zen-word-count="visible"] {
+    .status-bar .word-count {
+      position: fixed;
+      bottom: @component-padding;
+      right: @component-padding;
+      padding: 0 @component-padding;
+      background: @syntax-background-color;
+      color: @syntax-text-color;
+    }
+  }
+
+  &[data-zen-tabs="visible"] {
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      .tab {
+        display: none;
+      }
+      .active {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
