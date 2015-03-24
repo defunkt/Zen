@@ -8,7 +8,7 @@ module.exports =
       type: 'boolean'
       default: true
     hideTabs:
-      description: 'Show the current tab.'
+      description: 'Disable to keep the current tab visible when Zen.'
       type: 'boolean'
       default: true
     showWordCount:
