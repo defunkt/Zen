@@ -16,5 +16,10 @@
   },
   "dependencies": {
     "jquery": "2.x.x"
-  }
+  },
+  "keywords": [
+    "writing",
+    "zen",
+    "distraction free"
+  ]
 }
