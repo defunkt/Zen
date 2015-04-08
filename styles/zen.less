@@ -2,15 +2,18 @@
 @import "syntax-variables";
 
 [data-zen="true"] {
-  atom-workspace,
-  atom-pane-container atom-pane,
   atom-pane-container atom-pane .item-views {
     background: @syntax-background-color !important;
   }
-
   atom-text-editor:not(.mini) {
     margin: 0 auto;
     max-width: 100%;
+  }
+  atom-workspace {
+    padding: 0;
+  }
+  atom-workspace atom-panel-container.left:empty {
+    padding: 0;
   }
 
   .tab-bar {
