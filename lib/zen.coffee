@@ -82,6 +82,14 @@ module.exports =
         )
         @restoreTree = true
 
+      # Hide Minimap
+      if $('atom-text-editor /deep/ atom-text-editor-minimap').length
+        atom.commands.dispatch(
+          atom.views.getView(atom.workspace),
+          'minimap:toggle'
+        )
+        @restoreMinimap = true
+
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
 
@@ -104,11 +112,19 @@ module.exports =
       # Unset the width
       $('atom-text-editor:not(.mini)').css 'width', ''
 
-      # Hide TreeView
+      # Restore TreeView
       if @restoreTree
         atom.commands.dispatch(
           atom.views.getView(atom.workspace),
           'tree-view:show'
+        )
+        @restoreTree = false
+
+      # Restore Minimap
+      if @restoreMinimap and $('atom-text-editor /deep/ atom-text-editor-minimap').length isnt 1
+        atom.commands.dispatch(
+          atom.views.getView(atom.workspace),
+          'minimap:toggle'
         )
         @restoreTree = false
 
