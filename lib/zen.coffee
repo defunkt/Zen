@@ -126,7 +126,7 @@ module.exports =
           atom.views.getView(atom.workspace),
           'minimap:toggle'
         )
-        @restoreTree = false
+        @restoreMinimap = false
 
 
       # Stop listening for pane or font change
