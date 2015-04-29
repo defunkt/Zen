@@ -10,6 +10,7 @@ fullscreen command:
 Settings:
 - Width
 - Keep the current tab visible
+- Optional soft wrap toggle
 - Keep the [word count](https://atom.io/packages/wordcount) visible*
 
 \* *0.12.1 - this features causes a render issue and is temporarily disabled until we find a solution*
