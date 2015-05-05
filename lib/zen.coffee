@@ -117,6 +117,11 @@ module.exports =
       # Unset the width
       $('atom-text-editor:not(.mini)').css 'width', ''
 
+      # Hack to fix #55 - scrollbars on statusbar after exiting Zen
+      $('.status-bar-right').css 'overflow', 'hidden'
+      requestAnimationFrame ->
+        $('.status-bar-right').css 'overflow', ''
+
       # Restore TreeView
       if @restoreTree
         atom.commands.dispatch(

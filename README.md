@@ -11,9 +11,7 @@ Settings:
 - Width
 - Keep the current tab visible
 - Optional soft wrap toggle
-- Keep the [word count](https://atom.io/packages/wordcount) visible*
-
-\* *0.12.1 - this features causes a render issue and is temporarily disabled until we find a solution*
+- Keep the [word count](https://atom.io/packages/wordcount) visible
 
 Note that settings are not available until the package has been activated, due to [a shortcoming in core](https://github.com/atom/settings-view/issues/356).
 
