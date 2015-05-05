@@ -7,10 +7,11 @@ module.exports =
     fullscreen:
       type: 'boolean'
       default: true
-    hideTabs:
-      description: 'Disable to keep the current tab visible when Zen.'
-      type: 'boolean'
-      default: true
+    tabs:
+      description: 'Determines the tab style used while Zen is active.'
+      type: 'string'
+      default: 'hidden'
+      enum: ['hidden', 'single', 'multiple']
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
       type: 'boolean'
@@ -43,10 +44,8 @@ module.exports =
         atom.notifications.addInfo 'Zen cannot be achieved in this view.'
         return
 
-      if atom.config.get 'Zen.hideTabs'
-        body.setAttribute 'data-zen-tabs', 'hidden'
-      else
-        body.setAttribute 'data-zen-tabs', 'visible'
+      if atom.config.get 'Zen.tabs'
+        body.setAttribute 'data-zen-tabs', atom.config.get 'Zen.tabs'
 
       if atom.config.get 'Zen.showWordCount'
         body.setAttribute 'data-zen-word-count', 'visible'

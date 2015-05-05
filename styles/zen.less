@@ -52,16 +52,56 @@
     }
   }
 
-  &[data-zen-tabs="visible"] {
+  &[data-zen-tabs="multiple"], &[data-zen-tabs="single"] {
     .tab-bar {
       display: flex;
       justify-content: center;
+      background: @syntax-background-color;
+      box-shadow: none;
+      &:after {
+        display: none;
+      }
+      .tab {
+        display: block;
+        box-shadow: none;
+        &, &:before, &:after {
+          background-image: none;
+          box-shadow: none;
+        }
+        .close-icon {
+          display: none;
+        }
+        .title {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  &[data-zen-tabs="multiple"] {
+    .tab-bar {
+      .tab {
+        opacity: .20;
+      }
+      .active {
+        display: block;
+        text-align: center;
+        width: 100%;
+        opacity: 0.85;
+      }
+    }
+  }
+
+  &[data-zen-tabs="single"] {
+    .tab-bar {
       .tab {
         display: none;
       }
       .active {
         display: block;
+        text-align: center;
         width: 100%;
+        opacity: 0.85;
       }
     }
   }
