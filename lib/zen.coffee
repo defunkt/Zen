@@ -36,21 +36,23 @@ module.exports =
     width = atom.config.get 'Zen.width'
     softWrap = atom.config.get 'Zen.softWrap'
 
-    if editor is undefined # e.g. settings-view
-      atom.notifications.addInfo 'Zen cannot be achieved in this view.'
-      return
-
-    if atom.config.get 'Zen.hideTabs'
-      body.setAttribute 'data-zen-tabs', 'hidden'
-    else
-      body.setAttribute 'data-zen-tabs', 'visible'
-
-    if atom.config.get 'Zen.showWordCount'
-      body.setAttribute 'data-zen-word-count', 'visible'
-    else
-      body.setAttribute 'data-zen-word-count', 'hidden'
-
     if body.getAttribute('data-zen') isnt 'true'
+
+      # Prevent zen mode for undefined editors
+      if editor is undefined # e.g. settings-view
+        atom.notifications.addInfo 'Zen cannot be achieved in this view.'
+        return
+
+      if atom.config.get 'Zen.hideTabs'
+        body.setAttribute 'data-zen-tabs', 'hidden'
+      else
+        body.setAttribute 'data-zen-tabs', 'visible'
+
+      if atom.config.get 'Zen.showWordCount'
+        body.setAttribute 'data-zen-word-count', 'visible'
+      else
+        body.setAttribute 'data-zen-word-count', 'hidden'
+
       # Enter Mode
       body.setAttribute 'data-zen', 'true'
 
