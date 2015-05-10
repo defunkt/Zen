@@ -51,47 +51,23 @@
       color: @syntax-text-color;
     }
   }
-
-  &[data-zen-tabs="multiple"], &[data-zen-tabs="single"] {
+  &[data-zen-word-count="visible"] {
+    .status-bar .word-count {
+      position: fixed;
+      bottom: @component-padding;
+      right: @component-padding;
+      padding: 0 @component-padding;
+      background: @syntax-background-color;
+      color: @syntax-text-color;
+    }
+  }
+  &[data-zen-tabs="multiple"],
+  &[data-zen-tabs="single"] {
     .tab-bar {
       display: flex;
       justify-content: center;
-      background: @syntax-background-color;
-      box-shadow: none;
-      &:after {
-        display: none;
-      }
-      .tab {
-        display: block;
-        box-shadow: none;
-        &, &:before, &:after {
-          background-image: none;
-          box-shadow: none;
-        }
-        .close-icon {
-          display: none;
-        }
-        .title {
-          text-align: center;
-        }
-      }
     }
   }
-
-  &[data-zen-tabs="multiple"] {
-    .tab-bar {
-      .tab {
-        opacity: .20;
-      }
-      .active {
-        display: block;
-        text-align: center;
-        width: 100%;
-        opacity: 0.85;
-      }
-    }
-  }
-
   &[data-zen-tabs="single"] {
     .tab-bar {
       .tab {
@@ -99,16 +75,7 @@
       }
       .active {
         display: block;
-        text-align: center;
-        width: 100%;
-        opacity: 0.85;
       }
     }
   }
 }
-
-// .status-bar-right.pull-right {
-//   float: none !important;
-//   flex: 1 1 33%;
-//   text-align: right;
-// }
