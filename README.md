@@ -9,8 +9,8 @@ fullscreen command:
 
 Settings:
 - Width
-- Keep the current tab visible
-- Optional soft wrap toggle
+- Tabs can all be hidden, or all except the active tab
+- Optional soft wrap
 - Keep the [word count](https://atom.io/packages/wordcount) visible
 
 Note that settings are not available until the package has been activated, due to [a shortcoming in core](https://github.com/atom/settings-view/issues/356).
