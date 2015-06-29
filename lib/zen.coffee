@@ -107,7 +107,7 @@ module.exports =
       atom.setFullScreen false if fullscreen
 
       # Restore previous soft wrap setting when leaving zen mode
-      if @unSoftWrap
+      if @unSoftWrap and editor isnt undefined
         editor.setSoftWrapped (not softWrap)
         @unSoftWrap = null
 
