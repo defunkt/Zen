@@ -14,8 +14,13 @@ module.exports =
       enum: ['hidden', 'single', 'multiple']
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
-      type: 'boolean'
-      default: false
+      type: 'string'
+      default: 'Hidden'
+      enum: [
+        'Hidden',
+        'Left',
+        'Right'
+      ]
     softWrap:
       description: 'Enables / Disables soft wrapping when Zen is active.'
       type: 'boolean'
@@ -47,10 +52,15 @@ module.exports =
       if atom.config.get 'Zen.tabs'
         body.setAttribute 'data-zen-tabs', atom.config.get 'Zen.tabs'
 
-      if atom.config.get 'Zen.showWordCount'
-        body.setAttribute 'data-zen-word-count', 'visible'
-      else
-        body.setAttribute 'data-zen-word-count', 'hidden'
+      switch atom.config.get 'Zen.showWordCount'
+        when 'Left'
+          body.setAttribute 'data-zen-word-count', 'visible'
+          body.setAttribute 'data-zen-word-count-position', 'left'
+        when 'Right'
+          body.setAttribute 'data-zen-word-count', 'visible'
+          body.setAttribute 'data-zen-word-count-position', 'right'
+        when 'Hidden'
+          body.setAttribute 'data-zen-word-count', 'hidden'
 
       # Enter Mode
       body.setAttribute 'data-zen', 'true'

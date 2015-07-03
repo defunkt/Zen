@@ -61,6 +61,12 @@
       color: @syntax-text-color;
     }
   }
+  &[data-zen-word-count-position="left"] {
+    .status-bar .word-count {
+      right: auto;
+      left: @component-padding;
+    }
+  }
   &[data-zen-tabs="multiple"],
   &[data-zen-tabs="single"] {
     .tab-bar {
