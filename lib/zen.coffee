@@ -7,11 +7,32 @@ module.exports =
     fullscreen:
       type: 'boolean'
       default: true
+      order: 1
+    softWrap:
+      description: 'Enables / Disables soft wrapping when Zen is active.'
+      type: 'boolean'
+      default: atom.config.get 'editor.softWrap'
+      order: 2
+    gutter:
+      description: 'Shows / Hides the gutter when Zen is active.'
+      type: 'boolean'
+      default: false
+      order: 3
+    typewriter:
+      description: 'Keeps the cursor vertically centered where possible.'
+      type: 'boolean'
+      default: false
+      order: 4
+    width:
+      type: 'integer'
+      default: atom.config.get 'editor.preferredLineLength'
+      order: 5
     tabs:
       description: 'Determines the tab style used while Zen is active.'
       type: 'string'
       default: 'hidden'
       enum: ['hidden', 'single', 'multiple']
+      order: 6
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
       type: 'string'
@@ -21,21 +42,7 @@ module.exports =
         'Left',
         'Right'
       ]
-    softWrap:
-      description: 'Enables / Disables soft wrapping when Zen is active.'
-      type: 'boolean'
-      default: atom.config.get 'editor.softWrap'
-    width:
-      type: 'integer'
-      default: atom.config.get 'editor.preferredLineLength'
-    typewriter:
-      description: 'Keeps the cursor vertically centered where possible.'
-      type: 'boolean'
-      default: false
-    gutter:
-      description: 'Shows / Hides the gutter when Zen is active.'
-      type: 'boolean'
-      default: false
+      order: 7
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
