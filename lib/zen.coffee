@@ -32,6 +32,10 @@ module.exports =
       description: 'Keeps the cursor vertically centered where possible.'
       type: 'boolean'
       default: false
+    gutter:
+      description: 'Shows / Hides the gutter when Zen is active.'
+      type: 'boolean'
+      default: false
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -66,6 +70,8 @@ module.exports =
           body.setAttribute 'data-zen-word-count-position', 'right'
         when 'Hidden'
           body.setAttribute 'data-zen-word-count', 'hidden'
+
+      body.setAttribute 'data-zen-gutter', atom.config.get 'Zen.gutter'
 
       # Enter Mode
       body.setAttribute 'data-zen', 'true'
