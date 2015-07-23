@@ -28,6 +28,10 @@ module.exports =
     width:
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
+    gutter:
+      description: 'Show gutter when Zen is active.'
+      type: 'boolean'
+      default: false
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -61,6 +65,8 @@ module.exports =
           body.setAttribute 'data-zen-word-count-position', 'right'
         when 'Hidden'
           body.setAttribute 'data-zen-word-count', 'hidden'
+
+      body.setAttribute 'data-zen-gutter', atom.config.get 'Zen.gutter'
 
       # Enter Mode
       body.setAttribute 'data-zen', 'true'
