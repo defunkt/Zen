@@ -27,9 +27,6 @@
   }
 
   ::shadow {
-    .gutter {
-      display: none;
-    }
     .editor--private {
       .vertical-scrollbar {
         opacity: 0;
@@ -38,6 +35,14 @@
       &:hover .vertical-scrollbar {
         opacity: 1;
       }
+    }
+  }
+
+  &[data-zen-gutter="false"] {
+    ::shadow {
+       .gutter {
+         display: none;
+       }
     }
   }
 
