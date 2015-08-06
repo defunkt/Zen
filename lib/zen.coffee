@@ -67,10 +67,6 @@ module.exports =
 
       # Soft Wrap
       # Use zen soft wrapping setting's to override the default settings
-      if atom.config.get('editor.softWrap') isnt softWrap
-        atom.config.set('editor.softWrap', softWrap)
-        # restore default when leaving zen mode
-        @unSetSoftWrap = true
       if editor.isSoftWrapped() isnt softWrap
         editor.setSoftWrapped softWrap
         # restore default when leaving zen mode
@@ -118,12 +114,8 @@ module.exports =
 
       # Restore previous soft wrap setting when leaving zen mode
       if @unSoftWrap and editor isnt undefined
-        editor.setSoftWrapped (not softWrap)
+        editor.setSoftWrapped(atom.config.get('editor.softWrap'));
         @unSoftWrap = null
-
-      # Reset the config for softwrap when leaving zen mode
-      if @unSetSoftWrap
-        atom.config.set('editor.softWrap', (not softWrap))
 
       # Unset the width
       $('atom-text-editor:not(.mini)').css 'width', ''
