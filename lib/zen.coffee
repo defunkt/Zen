@@ -29,7 +29,7 @@ module.exports =
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
     typewriter:
-      description: 'Keep cursor in middle of screen'
+      description: 'Keeps the cursor vertically centered where possible.'
       type: 'boolean'
       default: false
 
