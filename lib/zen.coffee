@@ -96,6 +96,11 @@ module.exports =
           $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       if typewriter
+          if not atom.config.get('editor.scrollPastEnd')
+              atom.config.set('editor.scrollPastEnd', true)
+              @scrollPastEndReset = true
+          else
+              @scrollPastEndReset = false
           @lineChanged = editor.onDidChangeCursorPosition ->
               requestAnimationFrame ->
                   @halfScreen = Math.floor(editor.getRowsPerPage() / 2)
@@ -166,3 +171,4 @@ module.exports =
       @fontChanged?.dispose()
       @paneChanged?.dispose()
       @lineChanged?.dispose()
+      atom.config.set('editor.scrollPastEnd', false) if @scrollPastEndReset
