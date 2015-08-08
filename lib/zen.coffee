@@ -28,6 +28,10 @@ module.exports =
     width:
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
+    typewriter:
+      description: 'Keep cursor in middle of screen'
+      type: 'boolean'
+      default: false
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -41,6 +45,7 @@ module.exports =
     fullscreen = atom.config.get 'Zen.fullscreen'
     width = atom.config.get 'Zen.width'
     softWrap = atom.config.get 'Zen.softWrap'
+    typewriter = atom.config.get 'Zen.typewriter'
 
     if body.getAttribute('data-zen') isnt 'true'
 
@@ -89,6 +94,13 @@ module.exports =
       @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
         requestAnimationFrame ->
           $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
+
+      if typewriter
+          @lineChanged = editor.onDidChangeCursorPosition ->
+              requestAnimationFrame ->
+                  @halfScreen = Math.floor(editor.getRowsPerPage() / 2)
+                  @cursor = editor.getCursorScreenPosition()
+                  editor.setScrollTop(editor.getLineHeightInPixels() * (@cursor.row - @halfScreen))
 
       # Hide TreeView
       if $('.tree-view').length
@@ -153,3 +165,4 @@ module.exports =
       # Stop listening for pane or font change
       @fontChanged?.dispose()
       @paneChanged?.dispose()
+      @lineChanged?.dispose()
