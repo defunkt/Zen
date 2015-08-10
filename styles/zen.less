@@ -27,9 +27,6 @@
   }
 
   ::shadow {
-    .gutter {
-      display: none;
-    }
     .editor--private {
       .vertical-scrollbar {
         opacity: 0;
@@ -55,6 +52,14 @@
     .status-bar .word-count {
       right: auto;
       left: @component-padding;
+    }
+  }
+
+  &[data-zen-gutter="false"] {
+    ::shadow {
+       .gutter {
+         display: none;
+       }
     }
   }
 
