@@ -56,7 +56,6 @@ module.exports =
     fullscreen = atom.config.get 'Zen.fullscreen'
     width = atom.config.get 'Zen.width'
     softWrap = atom.config.get 'Zen.softWrap'
-    typewriter = atom.config.get 'Zen.typewriter'
 
     if body.getAttribute('data-zen') isnt 'true'
 
@@ -104,7 +103,7 @@ module.exports =
         requestAnimationFrame ->
           $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
-      if typewriter
+      if atom.config.get 'Zen.typewriter'
         if not atom.config.get('editor.scrollPastEnd')
           atom.config.set('editor.scrollPastEnd', true)
           @scrollPastEndReset = true
@@ -116,17 +115,19 @@ module.exports =
           editor.setScrollTop(editor.getLineHeightInPixels() * (cursor.row - halfScreen))
 
       @typewriterConfig = atom.config.observe 'Zen.typewriter', =>
-        if not atom.config.get('Zen.typewriter')
+        if not atom.config.get 'Zen.typewriter'
           if @scrollPastEndReset
             @scrollPastEndReset = false
             atom.config.set 'editor.scrollPastEnd', false
           @lineChanged?.dispose()
         else
           if not atom.config.get 'editor.scrollPastEnd'
-            atom.config.set 'editor.scrollPastEnd', true
+            if not @scrollPastEndReset
+              atom.config.set 'editor.scrollPastEnd', true
             @scrollPastEndReset = true
           else
             @scrollPastEndReset = false
+          @lineChanged?.dispose()
           @lineChanged = editor.onDidChangeCursorPosition ->
             halfScreen = Math.floor(editor.getRowsPerPage() / 2)
             cursor = editor.getCursorScreenPosition()
