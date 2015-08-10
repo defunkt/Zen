@@ -105,16 +105,32 @@ module.exports =
           $('atom-text-editor:not(.mini)').css 'width', editor.getDefaultCharWidth() * width
 
       if typewriter
-          if not atom.config.get('editor.scrollPastEnd')
-              atom.config.set('editor.scrollPastEnd', true)
-              @scrollPastEndReset = true
+        if not atom.config.get('editor.scrollPastEnd')
+          atom.config.set('editor.scrollPastEnd', true)
+          @scrollPastEndReset = true
+        else
+          @scrollPastEndReset = false
+        @lineChanged = editor.onDidChangeCursorPosition ->
+          halfScreen = Math.floor(editor.getRowsPerPage() / 2)
+          cursor = editor.getCursorScreenPosition()
+          editor.setScrollTop(editor.getLineHeightInPixels() * (cursor.row - halfScreen))
+
+      @typewriterConfig = atom.config.observe 'Zen.typewriter', =>
+        if not atom.config.get('Zen.typewriter')
+          if @scrollPastEndReset
+            @scrollPastEndReset = false
+            atom.config.set 'editor.scrollPastEnd', false
+          @lineChanged?.dispose()
+        else
+          if not atom.config.get 'editor.scrollPastEnd'
+            atom.config.set 'editor.scrollPastEnd', true
+            @scrollPastEndReset = true
           else
-              @scrollPastEndReset = false
+            @scrollPastEndReset = false
           @lineChanged = editor.onDidChangeCursorPosition ->
-              requestAnimationFrame ->
-                  @halfScreen = Math.floor(editor.getRowsPerPage() / 2)
-                  @cursor = editor.getCursorScreenPosition()
-                  editor.setScrollTop(editor.getLineHeightInPixels() * (@cursor.row - @halfScreen))
+            halfScreen = Math.floor(editor.getRowsPerPage() / 2)
+            cursor = editor.getCursorScreenPosition()
+            editor.setScrollTop editor.getLineHeightInPixels() * (cursor.row - halfScreen)
 
       # Hide TreeView
       if $('.tree-view').length
@@ -176,4 +192,7 @@ module.exports =
       @fontChanged?.dispose()
       @paneChanged?.dispose()
       @lineChanged?.dispose()
-      atom.config.set('editor.scrollPastEnd', false) if @scrollPastEndReset
+      if @scrollPastEndReset
+        atom.config.set('editor.scrollPastEnd', false)
+        @scrollPastEndReset = false
+      @typewriterConfig?.dispose()
