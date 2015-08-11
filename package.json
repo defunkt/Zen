@@ -1,7 +1,7 @@
 {
   "name": "Zen",
   "main": "./lib/zen",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "private": true,
   "description": "Distraction free writing.",
   "activationCommands": {
