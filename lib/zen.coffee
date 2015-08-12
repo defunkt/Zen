@@ -23,16 +23,21 @@ module.exports =
       type: 'boolean'
       default: false
       order: 4
+    minimap:
+      description: 'Enables / Disables the minimap plugin when Zen is active.'
+      type: 'boolean'
+      default: false
+      order: 5
     width:
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
-      order: 5
+      order: 6
     tabs:
       description: 'Determines the tab style used while Zen is active.'
       type: 'string'
       default: 'hidden'
       enum: ['hidden', 'single', 'multiple']
-      order: 6
+      order: 7
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
       type: 'string'
@@ -42,7 +47,7 @@ module.exports =
         'Left',
         'Right'
       ]
-      order: 7
+      order: 8
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -56,6 +61,7 @@ module.exports =
     fullscreen = atom.config.get 'Zen.fullscreen'
     width = atom.config.get 'Zen.width'
     softWrap = atom.config.get 'Zen.softWrap'
+    minimap = atom.config.get 'Zen.minimap'
 
     if body.getAttribute('data-zen') isnt 'true'
 
@@ -142,7 +148,7 @@ module.exports =
         @restoreTree = true
 
       # Hide Minimap
-      if $('atom-text-editor /deep/ atom-text-editor-minimap').length
+      if $('atom-text-editor /deep/ atom-text-editor-minimap').length and not minimap
         atom.commands.dispatch(
           atom.views.getView(atom.workspace),
           'minimap:toggle'
