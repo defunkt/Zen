@@ -64,6 +64,10 @@ module.exports =
     typewriter = atom.config.get 'Zen.typewriter'
     minimap = atom.config.get 'Zen.minimap'
 
+    # Left panel needed for hide/restore
+    panels = atom.workspace.getLeftPanels()
+    panel = panels[0]
+
     if body.getAttribute('data-zen') isnt 'true'
 
       # Prevent zen mode for undefined editors
@@ -123,7 +127,14 @@ module.exports =
                   editor.setScrollTop(editor.getLineHeightInPixels() * (@cursor.row - @halfScreen))
 
       # Hide TreeView
-      if $('.tree-view').length
+      if $('.nuclide-file-tree').length
+        if panel.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'nuclide-file-tree:toggle'
+          )
+          @restoreTree = true
+      else if $('.tree-view').length
         atom.commands.dispatch(
           atom.views.getView(atom.workspace),
           'tree-view:toggle'
@@ -163,10 +174,17 @@ module.exports =
 
       # Restore TreeView
       if @restoreTree
-        atom.commands.dispatch(
-          atom.views.getView(atom.workspace),
-          'tree-view:show'
-        )
+        if $('.nuclide-file-tree').length
+          unless panel.isVisible()
+            atom.commands.dispatch(
+              atom.views.getView(atom.workspace),
+              'nuclide-file-tree:toggle'
+            )
+        else
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'tree-view:show'
+          )
         @restoreTree = false
 
       # Restore Minimap
