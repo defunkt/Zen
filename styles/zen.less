@@ -7,10 +7,15 @@
   }
   atom-pane-container atom-pane {
     border: none !important;
+    &:not(.active){
+      display: none; // now works when you have mane panes open :)
+    }
   }
   atom-text-editor:not(.mini) {
     margin: 0 auto;
     max-width: 100%;
+    width: 100% !important; // prevents reliance on @syntax-background-color not being set in some themes
+    padding: 0 30%;
   }
   atom-workspace {
     padding: 0;
