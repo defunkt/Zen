@@ -27,20 +27,19 @@
     height: 0;
   }
 
-  ::shadow {
-    .wrap-guide {
-      visibility: hidden;
+  .wrap-guide {
+    visibility: hidden;
+  }
+  .editor--private {
+    .vertical-scrollbar {
+      opacity: 0;
+      transition: opacity .2s .1s;
     }
-    .editor--private {
-      .vertical-scrollbar {
-        opacity: 0;
-        transition: opacity .2s .1s;
-      }
-      &:hover .vertical-scrollbar {
-        opacity: 1;
-      }
+    &:hover .vertical-scrollbar {
+      opacity: 1;
     }
   }
+  
 
   &[data-zen-word-count="visible"] {
     .status-bar .word-count {
@@ -60,11 +59,9 @@
   }
 
   &[data-zen-gutter="false"] {
-    ::shadow {
-       .gutter {
-         display: none;
-       }
-    }
+     .gutter {
+       display: none;
+     } 
   }
 
   &[data-zen-tabs="multiple"],
