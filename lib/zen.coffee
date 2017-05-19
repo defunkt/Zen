@@ -55,7 +55,9 @@ module.exports =
   toggle: ->
 
     body = document.querySelector('body')
-    editor = atom.workspace.getActiveTextEditor()
+    editor =  atom.workspace.getActiveTextEditor()
+    editorElm =  atom.workspace.getActiveTextEditor().element
+
 
     # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
@@ -122,7 +124,7 @@ module.exports =
         @lineChanged = editor.onDidChangeCursorPosition ->
           halfScreen = Math.floor(editor.getRowsPerPage() / 2)
           cursor = editor.getCursorScreenPosition()
-          editor.setScrollTop(editor.getLineHeightInPixels() * (cursor.row - halfScreen))
+          editorElm.setScrollTop(editor.getLineHeightInPixels() * (cursor.row - halfScreen))
 
       @typewriterConfig = atom.config.observe 'Zen.typewriter', =>
         if not atom.config.get 'Zen.typewriter'
@@ -141,7 +143,7 @@ module.exports =
           @lineChanged = editor.onDidChangeCursorPosition ->
             halfScreen = Math.floor(editor.getRowsPerPage() / 2)
             cursor = editor.getCursorScreenPosition()
-            editor.setScrollTop editor.getLineHeightInPixels() * (cursor.row - halfScreen)
+            editorElm.setScrollTop editor.getLineHeightInPixels() * (cursor.row - halfScreen)
 
       # Hide TreeView
       if $('.nuclide-file-tree').length
