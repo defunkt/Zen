@@ -54,10 +54,14 @@ module.exports =
 
   toggle: ->
 
+    if ! atom.workspace.getActiveTextEditor()
+      # Prevent zen mode for undefined editors, e.g. settings
+      atom.notifications.addInfo 'Zen cannot be achieved in this view.'
+      return
+
     body = document.querySelector('body')
     editor =  atom.workspace.getActiveTextEditor()
     editorElm =  atom.workspace.getActiveTextEditor().element
-
 
     # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
@@ -70,12 +74,7 @@ module.exports =
     panel = panels[0]
 
     if body.getAttribute('data-zen') isnt 'true'
-
-      # Prevent zen mode for undefined editors
-      if editor is undefined # e.g. settings-view
-        atom.notifications.addInfo 'Zen cannot be achieved in this view.'
-        return
-
+      
       if atom.config.get 'Zen.tabs'
         body.setAttribute 'data-zen-tabs', atom.config.get 'Zen.tabs'
 
