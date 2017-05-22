@@ -70,11 +70,10 @@ module.exports =
     minimap = atom.config.get 'Zen.minimap'
 
     # Left panel needed for hide/restore
-    panels = atom.workspace.getLeftPanels()
-    panel = panels[0]
+    panel = atom.workspace.getLeftDock()
 
     if body.getAttribute('data-zen') isnt 'true'
-      
+
       if atom.config.get 'Zen.tabs'
         body.setAttribute 'data-zen-tabs', atom.config.get 'Zen.tabs'
 
