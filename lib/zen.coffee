@@ -75,9 +75,9 @@ module.exports =
 
     # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
-    width = atom.config.get 'Zen.width'
-    softWrap = atom.config.get 'Zen.softWrap'
-    minimap = atom.config.get 'Zen.minimap'
+    width      = atom.config.get 'Zen.width'
+    softWrap   = atom.config.get 'Zen.softWrap'
+    minimap    = atom.config.get 'Zen.minimap'
 
     # Panels needed for hide/restore
     panelLeft = atom.workspace.getLeftDock()
