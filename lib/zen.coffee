@@ -28,13 +28,13 @@ module.exports =
       type: 'boolean'
       default: false
       order: 5
-    bottomPanel:
-      description: 'Enables / Disables the bottom pane when Zen is active.'
-      type: 'boolean'
-      default: true
-      order: 7
     rightPanel:
       description: 'Enables / Disables the right pane when Zen is active.'
+      type: 'boolean'
+      default: true
+      order: 6
+    bottomPanel:
+      description: 'Enables / Disables the bottom pane when Zen is active.'
       type: 'boolean'
       default: true
       order: 7
@@ -75,9 +75,9 @@ module.exports =
 
     # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
-    width = atom.config.get 'Zen.width'
-    softWrap = atom.config.get 'Zen.softWrap'
-    minimap = atom.config.get 'Zen.minimap'
+    width      = atom.config.get 'Zen.width'
+    softWrap   = atom.config.get 'Zen.softWrap'
+    minimap    = atom.config.get 'Zen.minimap'
 
     # Panels needed for hide/restore
     panelLeft = atom.workspace.getLeftDock()
