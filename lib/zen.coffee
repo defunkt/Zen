@@ -28,16 +28,26 @@ module.exports =
       type: 'boolean'
       default: false
       order: 5
+    bottomPanel:
+      description: 'Enables / Disables the bottom pane when Zen is active.'
+      type: 'boolean'
+      default: true
+      order: 7
+    rightPanel:
+      description: 'Enables / Disables the right pane when Zen is active.'
+      type: 'boolean'
+      default: true
+      order: 7
     width:
       type: 'integer'
       default: atom.config.get 'editor.preferredLineLength'
-      order: 6
+      order: 8
     tabs:
       description: 'Determines the tab style used while Zen is active.'
       type: 'string'
       default: 'hidden'
       enum: ['hidden', 'single', 'multiple']
-      order: 7
+      order: 9
     showWordCount:
       description: 'Show the word-count if you have the package installed.'
       type: 'string'
@@ -47,7 +57,7 @@ module.exports =
         'Left',
         'Right'
       ]
-      order: 8
+      order: 10
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -60,8 +70,8 @@ module.exports =
       return
 
     body = document.querySelector('body')
-    editor =  atom.workspace.getActiveTextEditor()
-    editorElm =  atom.workspace.getActiveTextEditor().element
+    editor = atom.workspace.getActiveTextEditor()
+    editorElm = atom.workspace.getActiveTextEditor().element
 
     # should really check current fullsceen state
     fullscreen = atom.config.get 'Zen.fullscreen'
@@ -69,8 +79,10 @@ module.exports =
     softWrap = atom.config.get 'Zen.softWrap'
     minimap = atom.config.get 'Zen.minimap'
 
-    # Left panel needed for hide/restore
-    panel = atom.workspace.getLeftDock()
+    # Panels needed for hide/restore
+    panelLeft = atom.workspace.getLeftDock()
+    panelRight = atom.workspace.getRightDock()
+    panelBottom = atom.workspace.getBottomDock()
 
     if body.getAttribute('data-zen') isnt 'true'
 
@@ -145,7 +157,7 @@ module.exports =
 
       # Hide TreeView
       if $('.nuclide-file-tree').length
-        if panel.isVisible()
+        if panelLeft.isVisible()
           atom.commands.dispatch(
             atom.views.getView(atom.workspace),
             'nuclide-file-tree:toggle'
@@ -165,6 +177,25 @@ module.exports =
           'minimap:toggle'
         )
         @restoreMinimap = true
+
+      # Hide Right Dock
+      if atom.config.get 'Zen.rightPanel'
+        if panelRight.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'window:toggle-right-dock'
+          )
+        @restoreRightDock = true
+
+      # Hide Bottom Dock
+      if atom.config.get 'Zen.bottomPanel'
+        if panelBottom.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'window:toggle-bottom-dock'
+          )
+        @restoreBottomDock = true
+
 
       # Enter fullscreen
       atom.setFullScreen true if fullscreen
@@ -192,7 +223,7 @@ module.exports =
       # Restore TreeView
       if @restoreTree
         if $('.nuclide-file-tree').length
-          unless panel.isVisible()
+          unless panelLeft.isVisible()
             atom.commands.dispatch(
               atom.views.getView(atom.workspace),
               'nuclide-file-tree:toggle'
@@ -212,6 +243,23 @@ module.exports =
         )
         @restoreMinimap = false
 
+      # Restore Right Dock
+      if @restoreRightDock
+        unless panelRight.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'window:toggle-right-dock'
+          )
+      @restoreRightDock = false
+
+      # Restore Bottom Dock
+      if @restoreBottomDock
+        unless panelBottom.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'window:toggle-bottom-dock'
+          )
+      @restoreBottomDock = false
 
       # Stop listening for pane or font change
       @fontChanged?.dispose()
