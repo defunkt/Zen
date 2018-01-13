@@ -164,11 +164,12 @@ module.exports =
           )
           @restoreTree = true
       else if $('.tree-view').length
-        atom.commands.dispatch(
-          atom.views.getView(atom.workspace),
-          'tree-view:toggle'
-        )
-        @restoreTree = true
+        if panelLeft.isVisible()
+          atom.commands.dispatch(
+            atom.views.getView(atom.workspace),
+            'tree-view:toggle'
+          )
+          @restoreTree = true
 
       # Hide Minimap
       if $('atom-text-editor /deep/ atom-text-editor-minimap').length and not minimap
@@ -229,10 +230,11 @@ module.exports =
               'nuclide-file-tree:toggle'
             )
         else
-          atom.commands.dispatch(
-            atom.views.getView(atom.workspace),
-            'tree-view:show'
-          )
+          unless panelLeft.isVisible()
+            atom.commands.dispatch(
+              atom.views.getView(atom.workspace),
+              'tree-view:show'
+            )
         @restoreTree = false
 
       # Restore Minimap
