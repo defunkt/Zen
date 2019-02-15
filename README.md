@@ -12,6 +12,7 @@ Settings:
 - Tabs can all be hidden, or all except the active tab
 - Optional soft wrap
 - Keep the [word count](https://atom.io/packages/wordcount) visible
+- Cursor style. Can be configured to be a light/opaque non-blinking cursor, or hidden entirely.
 
 Note that settings are not available until the package has been activated, due to [a shortcoming in core](https://github.com/atom/settings-view/issues/356). Also, if you change themes, you might need to reload Atom for the colors to be applied correctly to all packages including Zen.
 

@@ -33,13 +33,12 @@
   .editor--private {
     .vertical-scrollbar {
       opacity: 0;
-      transition: opacity .2s .1s;
+      transition: opacity 0.2s 0.1s;
     }
     &:hover .vertical-scrollbar {
       opacity: 1;
     }
   }
-  
 
   &[data-zen-word-count="visible"] {
     .status-bar .word-count {
@@ -59,9 +58,9 @@
   }
 
   &[data-zen-gutter="false"] {
-     .gutter {
-       display: none;
-     } 
+    .gutter {
+      display: none;
+    }
   }
 
   &[data-zen-tabs="multiple"],
@@ -79,6 +78,17 @@
       .active {
         display: block;
       }
+    }
+  }
+
+  &[data-zen-cursor="still"] {
+    atom-text-editor .cursor {
+      opacity: 0.3 !important;
+    }
+  }
+  &[data-zen-cursor="hidden"] {
+    atom-text-editor .cursor {
+      opacity: 0 !important;
     }
   }
 }
