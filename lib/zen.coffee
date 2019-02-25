@@ -48,6 +48,16 @@ module.exports =
         'Right'
       ]
       order: 8
+    cursorStyle:
+      description: 'Change the cursor behavior.'
+      type: 'string'
+      default: 'Default'
+      enum: [
+        'Default',
+        'Still',
+        'Hidden'
+      ]
+      order: 9
 
   activate: (state) ->
     atom.commands.add 'atom-workspace', 'zen:toggle', => @toggle()
@@ -86,6 +96,12 @@ module.exports =
           body.setAttribute 'data-zen-word-count-position', 'right'
         when 'Hidden'
           body.setAttribute 'data-zen-word-count', 'hidden'
+
+      switch atom.config.get 'Zen.cursorStyle'
+        when 'Still'
+          body.setAttribute 'data-zen-cursor', 'still'
+        when 'Hidden'
+          body.setAttribute 'data-zen-cursor', 'hidden'
 
       body.setAttribute 'data-zen-gutter', atom.config.get 'Zen.gutter'
 

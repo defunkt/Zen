@@ -39,3 +39,7 @@ Thumbs.db
 # Node installed packages #
 ###########################
 node_modules/*
+
+# Package lock #
+###########################
+package-lock.json
